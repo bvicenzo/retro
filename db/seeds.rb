@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+if Rails.env.eql? 'development'
+  puts "Setting development data..."
+  user = User.where(email: 'admin@admin.com').first
+  User.create!(name: 'Administrator', email: 'admin@admin.com', password: '12345', password_confirmation: '12345') unless user.present?
+  puts "Done!!!!"
+end
